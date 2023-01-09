@@ -1,0 +1,26 @@
+{{ define "main" }}
+<main id="main">
+  <div class="container has-padding">
+    <div class="article-card post single">
+      <h1 class="title">{{ .Title }}</h1>
+      <div class="post-info">
+        <span>
+          <time datetime={{ .Date.Format "2006-01-02T15:04:05Z0700" }} class="date">{{ .Date.Format "2006.01.02" }}</time>
+        </span>
+        <span>
+          <a href="{{ .RelPermalink }}">{{ .RelPermalink }}</a>
+        </span>
+      </div>
+      <div class="post-header-line"></div>
+      {{ if (.Params.toc) }}
+      <h3>Contents</h3>
+      {{ .TableOfContents }}
+      <div class="post-header-line"></div>
+      {{ end }}
+      <article class="post-entry content">
+        {{ .Content }}
+      </article>
+    </div>
+  </div>
+</main>
+{{ end }}

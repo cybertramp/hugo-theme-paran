@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default " ko" }}">
+{{ partial "head.html" . }}
+
+<body>
+  <div class="super-frame">
+    <div class="top-frame">
+      <div class="top-bar">
+        {{ partial "menubar.html" . }}
+      </div>
+    </div>
+    <div class="root-frame">
+      <div class="main-frame">
+        <div class="grid-1">
+        </div>
+        <div class="grid-2">
+          {{ block "main" . }}{{ end }}
+        </div>
+        <div class="grid-3">
+        </div>
+      </div>
+    </div>
+    <div class="bottom-frame">
+      {{ partial "footer.html" . }}
+    </div>
+  </div>
+
+</body>
+
+</html>

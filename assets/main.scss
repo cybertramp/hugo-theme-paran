@@ -1,0 +1,89 @@
+/*
+ * Paran
+ * Hugo theme
+ * https://github.com/cybertramp/hugo-theme-paran
+ * Designed by cybertramp(paran_son@outlook.com)
+ * Updated in 2023.01
+*/
+
+@import "docker.scss";
+
+html body {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  padding: 0;
+  margin: 0;
+
+  background: linear-gradient(45deg, #57003f 0%, #f57453 100%);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+.super-frame {
+  height: 100%;
+}
+
+.top-frame {
+  .top-bar {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    background: linear-gradient(#333, #323232);
+    align-items: center;
+    justify-content: center;
+    .box-time {
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+}
+
+.root-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-frame {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 100vh;
+}
+.grid-1 {
+  grid-area: 1 / 1 / 2 / 2;
+  height: 5%;
+}
+.grid-2 {
+  height: 90%;
+  grid-area: 2 / 1 / 3 / 2;
+}
+.grid-3 {
+  grid-area: 3 / 1 / 4 / 2;
+  height: 5%;
+}
+
+.bottom-frame {
+}
+
+.main-window {
+}

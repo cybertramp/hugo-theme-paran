@@ -1,0 +1,17 @@
+<!-- load scss -->
+{{ $main_style := resources.Get "main.scss" | resources.ToCSS }}
+
+{{ $CSS := slice $main_style | resources.Concat "style.css" }}
+
+{{ if not .Site.IsServer }}
+{{ $CSS := $CSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $CSS.Permalink }}" integrity="{{ $CSS.Data.Integrity }}" rel="preload stylesheet"
+  as="style" />
+{{ else }}
+<link rel="stylesheet" href="{{ $CSS.Permalink }}" rel="preload stylesheet" as="style" />
+{{ end }}
+
+<!-- hightlight -->
+{{ if and .IsPage (not site.Params.diable_highlight_js) }}
+<script defer src="{{ `highlight.min.js` | absURL }}" onload="hljs.initHighlightingOnLoad();"></script>
+{{ end }}
