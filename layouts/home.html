@@ -1,0 +1,15 @@
+{{ define "main" }}
+  {{/* Home page content */}}
+  {{ .Content }}
+
+
+  <div class="split-line"></div>
+
+  {{/* List of pages */}}
+  <div class="list-items">
+    {{ range site.RegularPages }}
+      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      {{ .Summary }}
+    {{ end }}
+  </div>
+{{ end }}

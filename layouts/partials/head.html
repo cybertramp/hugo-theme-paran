@@ -1,0 +1,24 @@
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+{{- /* Title */}}
+{{- $pageTitle := site.Title }}
+{{- if (and .Title (not .IsHome)) }}
+  {{- $pageTitle = printf "%s | %s" .Title $pageTitle }}
+{{- end }}
+<title>{{ $pageTitle }}</title>
+
+{{- /* Load scss style */}}
+{{- $style := resources.Get "css/main.scss" }}
+
+{{- /* SCSS to CSS */}}
+{{- $style = $style | css.Sass }}
+
+{{- /* Development environment */}}
+{{- if hugo.IsProduction }}
+  {{- $style = $style | minify | fingerprint }}
+{{- end }}
+
+
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" />

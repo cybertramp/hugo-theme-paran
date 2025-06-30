@@ -1,0 +1,87 @@
+html {
+    -webkit-tap-highlight-color: transparent;
+    overflow-y: scroll;
+    /* -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility; */
+}
+
+body {
+    color: #222;
+    font-family: sans-serif;
+    line-height: 1.5;
+    margin: 1rem;
+    font-size: 18px;
+    line-height: 1.6em;
+    word-break: break-word;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow-x: auto;
+    word-break: keep-all;
+}
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+table {
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+body,
+figure {
+    margin: 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+header {
+    border-bottom: 1px solid #222;
+    margin-bottom: 1rem;
+}
+
+footer {
+    border-top: 1px solid #222;
+    margin-top: 1rem;
+}
+
+a {
+    color: #00e;
+    text-decoration: none;
+}

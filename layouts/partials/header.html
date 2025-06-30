@@ -1,0 +1,32 @@
+<header class="header">
+  <div class="floating-menu-wrapper">
+    <nav class="nav floating-menu">
+      <div class="logo">
+        <a href="{{ "" | absURL }}" title="{{ site.Title }}">
+          {{- if site.Params.logo.icon }}
+            {{- $img := resources.Get site.Params.logo.icon }}
+            <img src="{{ $img.Permalink }}" alt="logo" height="30" width="30" />
+          {{- end }}
+          Home
+        </a>
+      </div>
+
+      <ul id="menu">
+        {{- range site.Menus.main }}
+          <li>
+            <a href="{{ .URL }}" title="{{ .Title | default .Name }}">
+              {{- .Name -}}
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+
+      <button id="search-btn" class="search-icon-btn" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="14.1213" y1="14.1213" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
