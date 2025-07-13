@@ -1,0 +1,48 @@
+{{ define "main" }}
+  <article class="main post">
+    <header class="post-header">
+      <div class="post-title-meta">
+        <h1>{{ .Title }}</h1>
+      </div>
+
+      <div class="post-category">
+        {{ with .Params.categories }}
+          <span
+            >Page location: /
+            {{ range . }}
+              <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            {{ end }}
+          </span>
+        {{ else }}
+          <span>Loc: /</span>
+        {{ end }}
+      </div>
+
+      <div class="post-third-line">
+        {{ with .Params.tags }}
+          <div class="post-tags">
+            <span>Tags: </span>
+            {{ range $index, $tag := . }}
+              {{ if $index }},{{ end }}
+              <a href="{{ "tags/" | relLangURL }}{{ $tag | urlize }}">#{{ $tag }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ if .Date }}
+          <div class="post-date">
+            <span>Written on</span>
+            {{ .Date.Format "2006-01-02" }}
+            {{ if ne .Lastmod .Date }}
+              (Last edit: {{ .Lastmod.Format "2006-01-02" }})
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </header>
+
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

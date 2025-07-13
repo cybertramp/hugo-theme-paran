@@ -1,0 +1,165 @@
+{{ define "main" }}
+  <div class="search-container">
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Enter search keyword" autocomplete="off" />
+      <button id="search-button">Search</button>
+    </div>
+    <div id="search-results"></div>
+    <div id="result-count"></div>
+  </div>
+
+  <script id="search-index" type="application/json">
+    {{- $pages := where site.Pages "Kind" "page" -}}
+    {{- $index := slice -}}
+    {{- range $pages -}}
+      {{- $index = $index | append (dict "title" .Title "permalink" .RelPermalink "content" (.Plain | htmlUnescape) "summary" .Summary "date" (.Date.Format "2006-01-02") "tags" .Params.tags) -}}
+    {{- end -}}
+    {{- $index | jsonify -}}
+    </script>
+  <script src="/fuse.min.js" onload="console.log('fuse.min.js loaded')" onerror="console.error('fuse.min.js load failed')"></script>
+  <script>
+    console.log("Search system loaded");
+
+    try {
+      // 1. JSON 요소 존재 확인
+      const jsonElement = document.getElementById("search-index");
+      if (!jsonElement) {
+        throw new Error("Search index element not found. Please check if script#search-index exists in HTML.");
+      }
+
+      // 2. JSON 데이터 유효성 검사
+      const rawText = jsonElement.textContent.trim();
+      console.log("Raw JSON Text:", rawText.substring(0, 100) + (rawText.length > 100 ? "..." : ""));
+
+      if (!rawText) {
+        throw new Error("검색 인덱스 데이터가 비어있습니다. Hugo가 JSON을 생성하지 못한 것 같습니다.");
+      }
+
+      let rawData;
+      try {
+        const parsed = JSON.parse(rawText);
+        // 파싱 결과가 문자열이면 다시 JSON.parse 시도
+        rawData = typeof parsed === "string" ? JSON.parse(parsed) : parsed;
+      } catch (e) {
+        console.error("JSON 파싱 오류:", e);
+        throw new Error("검색 인덱스 JSON 형식이 잘못되었습니다: " + e.message);
+      }
+
+      // 3. 데이터 구조 검증
+      console.log("JSON 데이터 구조:", rawData);
+      if (rawData === null || rawData === undefined) {
+        throw new Error("Invalid data structure. Data is null or undefined.");
+      }
+
+      // 배열이 아닌 경우 배열로 변환
+      let normalizedData = rawData;
+      if (!Array.isArray(rawData)) {
+        if (rawData && typeof rawData === "object") {
+          normalizedData = Object.values(rawData);
+        } else {
+          throw new Error(`Invalid data structure. (type: ${typeof rawData})`);
+        }
+      }
+
+      // 4. 데이터 정규화 (더 엄격한 필터링)
+      const searchData = normalizedData
+        .filter((item) => item && (item.title || item.content) && typeof item === "object")
+        .map((item, index) => ({
+          title: item.title || `[No title-${index}]`,
+          content: item.content || "",
+          permalink: item.permalink || "#",
+          summary: item.summary || "",
+          date: item.date || "",
+          tags: Array.isArray(item.tags) ? item.tags : [],
+        }));
+
+      console.log("Total valid search items:", searchData.length);
+      if (searchData.length === 0) {
+        throw new Error("No valid search data to process");
+      }
+
+      // 5. Fuse.js 초기화
+      const fuse = new Fuse(searchData, {
+        keys: [
+          { name: "title", weight: 0.5 },
+          { name: "content", weight: 0.4 },
+          { name: "tags", weight: 0.1 },
+        ],
+        includeMatches: true,
+        threshold: 0.3,
+        ignoreLocation: false, // 정확한 위치 매칭
+        minMatchCharLength: 3, // 최소 3글자 이상
+        tokenize: true,
+        matchAllTokens: true,
+        findAllMatches: false, // 전체 매칭 비활성화
+        shouldSort: true,
+      });
+
+      // 초기 화면 - 전체 포스트 수만 표시
+      document.getElementById("result-count").textContent = `Total ${searchData.length}ea posts`;
+
+      function renderResults(results) {
+        const resultsDiv = document.getElementById("search-results");
+        const resultCount = document.getElementById("result-count");
+
+        if (!results.length) {
+          resultsDiv.innerHTML = "<p>Not found matched results</p>";
+          resultCount.textContent = "0ea results";
+          return;
+        }
+
+        resultCount.textContent = `${results.length}ea results`;
+        resultsDiv.innerHTML = `<ul>${results
+          .map(
+            (result) => `<li>
+            <h3>${result.item.title}</h3>
+            <p>${getHighlightedSnippet(result)}</p>
+            <a href="${result.item.permalink}">show more..</a>
+          </li>`,
+          )
+          .join("")}</ul>`;
+      }
+
+      function getHighlightedSnippet(result) {
+        // 단어 단위 매칭 강조
+        const contentMatch = result.matches?.find((m) => m.key === "content");
+        if (!contentMatch) return result.item.content.substring(0, 100) + "...";
+
+        const { value, indices } = contentMatch;
+        let highlighted = "";
+        let lastIndex = 0;
+
+        indices.forEach(([start, end]) => {
+          highlighted += value.substring(lastIndex, start);
+          highlighted += `<mark>${value.substring(start, end + 1)}</mark>`;
+          lastIndex = end + 1;
+        });
+
+        highlighted += value.substring(lastIndex);
+        return highlighted.substring(0, 150) + (highlighted.length > 150 ? "..." : "");
+      }
+
+      // 7. 초기 전체 목록 표시
+      // renderResults(searchData.map(item => ({ item, score: 0, matches: [] })));
+
+      // 8. 실시간 검색 핸들러
+      document.getElementById("search-input").addEventListener("input", (e) => {
+        const query = e.target.value.trim();
+        if (query.length < 3) {
+          document.getElementById("result-count").textContent = `Total ${searchData.length}ea posts`;
+          document.getElementById("search-results").innerHTML = "<p>Please enter at least 3 characters</p>";
+          return;
+        }
+
+        const results = fuse.search(query);
+        renderResults(results);
+      });
+    } catch (error) {
+      console.error("Search system initialization failed - detailed error:", error);
+      document.getElementById("search-results").innerHTML = `<div class="search-error">
+          <p>Search functionality load failed: ${error.message}</p>
+          <p>Please check the detailed error in the console.</p>
+        </div>`;
+    }
+  </script>
+{{ end }}
