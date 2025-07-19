@@ -36,15 +36,49 @@
         line-height: 1.6;
         margin-top: 2rem;
 
-        pre,
-        code {
-            font-size: 0.8em;
+        pre {
             line-height: 1.6;
+            padding: 1rem;
+            overflow-x: auto;
+            max-width: 100%;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        code {
+            line-height: 1.6;
+            padding: 0.2rem 0.4rem;
+            background-color: #f5f5f5;
+            border-radius: 3px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        pre code {
+            padding: 0;
+            background-color: transparent;
+            border-radius: 0;
+            overflow-wrap: normal;
+            white-space: pre;
         }
 
         img {
             margin-top: 1rem;
             margin-bottom: 1rem;
+        }
+
+        ul,
+        ol {
+            padding-left: 1.5rem;
+            margin-top: 0px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+
+            & > ul,
+            & > ol {
+                margin: 0.5rem 0;
+            }
         }
     }
 }
@@ -524,13 +558,38 @@
 //     }
 // }
 
-.pagefind-search-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-}
+.taxonomy-container {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 2rem;
 
-.pagefind-ui {
-    // --pagefind-ui-primary: #{$primary};
-    --pagefind-ui-font-size: 1rem;
+    .posts-list {
+        margin-top: 2rem;
+    }
+
+    .post-summary {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 0.5rem 0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+
+            .tags a {
+                color: var(--link-color);
+                &:hover {
+                    color: var(--link-hover-color);
+                }
+            }
+        }
+
+        .summary {
+            color: var(--content);
+            line-height: 1.6;
+        }
+    }
 }
