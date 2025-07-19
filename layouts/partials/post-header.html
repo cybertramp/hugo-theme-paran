@@ -1,0 +1,30 @@
+<header class="post-header">
+  <div class="post-title-meta">
+    <h1>{{ .Title }}</h1>
+  </div>
+
+  <div class="post-category">
+    {{ with .Params.categories }}
+      <span>
+        Page location: /
+        {{ range . }}
+          <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+        {{ end }}
+      </span>
+    {{ else }}
+      <span>Loc: {{ with .Section }}/{{ . }}{{ else }}/{{ end }}</span>
+    {{ end }}
+  </div>
+
+  <div class="post-third-line">
+    {{ with .Params.tags }}
+      <div class="post-tags">
+        <span>Tags: </span>
+        {{ range $index, $tag := . }}
+          {{ if $index }},{{ end }}
+          <a href="{{ "tags/" | relLangURL }}{{ $tag | urlize }}">#{{ $tag }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</header>

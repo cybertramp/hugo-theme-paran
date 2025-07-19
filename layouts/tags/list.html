@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{ partial "post-header.html" . }}
+<div class="tags-description">
+  {{ .Content }}
+</div>
+<div class="tags-list">
+  {{ range .Site.Taxonomies.tags }}
+    <a class="tag-badge" href="{{ .Page.RelPermalink }}">
+      #{{ .Page.Title }} <span class="tag-count">{{ len .Pages }}</span>
+    </a>
+  {{ end }}
+</div>
+{{ end }}

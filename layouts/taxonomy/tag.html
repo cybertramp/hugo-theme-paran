@@ -1,0 +1,9 @@
+{{ define "main" }}
+  <div class="selected-tag-info">
+    selected tag: {{ .Title }} ({{ len .Pages }}/{{ .Site.RegularPages | len }})
+  </div>
+  <div class="post-count">
+    Total Posts: {{ len .Pages }}
+  </div>
+  {{ partial "list-items" . }}
+{{ end }}

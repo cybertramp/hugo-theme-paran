@@ -10,7 +10,7 @@ body {
     font-family: sans-serif;
     line-height: 1.5;
     margin: 1rem;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.6em;
     word-break: break-word;
 }
@@ -21,6 +21,71 @@ table {
     border-spacing: 0;
     overflow-x: auto;
     word-break: keep-all;
+    border: 1px solid #000;
+}
+
+/* 전역 table 스타일 최소화 */
+table,
+th,
+td {
+    border-collapse: collapse;
+    padding: 2px 4px 2px 4px;
+}
+
+/* 마크다운 본문(post-content) 스타일 */
+.post-content {
+    line-height: 1.7;
+    color: #222;
+    margin-bottom: 2em;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.7em;
+    font-weight: bold;
+}
+
+.post-content p {
+    margin: 1em 0;
+}
+
+.post-content ul,
+.post-content ol {
+    margin: 1em 0 1em 2em;
+}
+
+.post-content table {
+    display: table;
+    margin: 2em auto;
+    width: auto;
+    min-width: 40%;
+    max-width: 100%;
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+.post-content table thead th {
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.post-content table td {
+    border: 1px solid #000;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.post-content table img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
 article,
@@ -84,4 +149,33 @@ footer {
 a {
     color: #00e;
     text-decoration: none;
+}
+
+/* 태그 리스트 스타일 */
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 2em 0;
+}
+.tag-badge {
+    display: inline-block;
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 0.4em 1em;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.tag-badge:hover {
+    background: #c7d2fe;
+}
+.tag-count {
+    background: #6366f1;
+    color: #fff;
+    margin-left: 0.5em;
+    padding: 0 0.6em;
+    border-radius: 10px;
+    font-size: 0.9em;
 }

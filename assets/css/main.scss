@@ -27,7 +27,6 @@
     padding: 0 var(--gap);
     box-sizing: border-box;
     display: block;
-    margin-top: 5rem;
 
     .post-header,
     .post-content {
@@ -35,6 +34,7 @@
         max-width: var(--content-inner-width);
         margin: 0 auto;
         line-height: 1.6;
+        margin-top: 2rem;
 
         pre,
         code {
@@ -157,7 +157,9 @@
     align-items: center;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 24px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        0 1.5px 8px rgba(0, 0, 0, 0.01);
     padding: 6px 16px;
 }
 
@@ -171,7 +173,7 @@
 
 #menu {
     display: flex;
-    gap: 18px;
+    gap: 12px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -187,9 +189,10 @@
     transition: background 0.2s;
 }
 
-#menu li a.active,
-#menu li a:hover {
-    background: #f0f0f0;
+#menu li a.menu-btn.active,
+#menu li a.menu-btn:hover {
+    background: #f0f0f0 !important;
+    color: #222 !important;
 }
 
 .search-icon-btn {
@@ -252,7 +255,6 @@
         z-index: 1000;
         background: var(--header-bg);
         padding: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         box-sizing: border-box; /* 패딩 포함 높이 계산 */
     }
 
@@ -434,12 +436,13 @@
     font-size: 16px;
     border: none;
     outline: none;
+    background-color: var(--primary);
 }
 
 #search-button {
     padding: 15px 25px;
     background-color: var(--primary);
-    color: white;
+    color: black;
     border: none;
     cursor: pointer;
     font-weight: 500;
@@ -501,25 +504,25 @@
     font-style: italic;
 }
 
-/* 다크 모드 지원 */
-@media (prefers-color-scheme: dark) {
-    .search-result-item {
-        background: #222;
-    }
+// /* 다크 모드 지원 */
+// @media (prefers-color-scheme: dark) {
+//     .search-result-item {
+//         background: #222;
+//     }
 
-    .search-result-summary {
-        color: #ddd;
-    }
+//     .search-result-summary {
+//         color: #ddd;
+//     }
 
-    .search-result-meta {
-        color: #aaa;
-    }
+//     .search-result-meta {
+//         color: #aaa;
+//     }
 
-    #search-input {
-        background: #333;
-        color: white;
-    }
-}
+//     #search-input {
+//         background: #333;
+//         color: white;
+//     }
+// }
 
 .pagefind-search-container {
     max-width: 800px;

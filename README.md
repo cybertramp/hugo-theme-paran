@@ -13,7 +13,7 @@ hugo server --renderStaticToDisk -D
 # for Debug
 
 ```sh
-hugo && cd themes/paran && npm run postbuild && cd ../.. && hugo server --renderStaticToDisk -D
+hugo && cd themes/paran && cd ../.. && hugo server --renderStaticToDisk -D
 ```
 
 # Todo
