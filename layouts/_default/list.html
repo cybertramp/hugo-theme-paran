@@ -1,9 +1,30 @@
 {{ define "main" }}
   {{ partial "post-header.html" . }}
-  <div class="post-count">
-    Total Posts:
-    {{ len .Pages }}
-  </div>
+  {{ if eq .Kind "term" }}
+    <div class="post-count">
+      Total Posts:
+      {{ len .Pages }}
+    </div>
 
-  {{ partial "list-items" . }}
+    {{ partial "list-items" . }}
+  {{ else }}
+    <div class="post-content">
+      <div class="post-list">
+        {{ $pages := .Pages }}
+        {{ if .IsHome }}
+          {{ $pages = site.RegularPages }}
+        {{ end }}
+        {{ range $pages }}
+          <div class="post-list-item">
+            <div class="post-list-item-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </div>
+            <div class="post-list-item-meta">
+              <span>{{ .Date.Format "2006-01-02" }}</span>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
 {{ end }}
