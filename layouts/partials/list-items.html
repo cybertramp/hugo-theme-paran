@@ -8,7 +8,7 @@
             <span class="post-date">{{ .Date.Format "2006.01.02" }}</span>
           </h2>
         </div>
-        {{ .Summary | truncate 180 "..." }}
+        {{ .Summary | plainify | truncate 150 "..." }}
       </div>
     </a>
   {{ end }}
