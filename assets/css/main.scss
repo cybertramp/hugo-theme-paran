@@ -7,33 +7,26 @@
 @import "common.scss";
 
 /* Main style */
-.main,
-.main.post {
+.main {
     position: relative;
-    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    min-height: calc(100vh - var(--floating-menu-header-height) - var(--footer-height));
     width: 100%;
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: 0 auto;
     padding: var(--content-gap) var(--gap) 0;
     box-sizing: border-box;
-    margin-top: 64px; /* 플로팅 메뉴바 대비 여백 */
-}
+    margin-top: var(--post-view-margin-height);
 
-.main.post {
-    // 실제 포스트 영역
-    width: 100%;
-    max-width: var(--post-width);
-    padding: 0 var(--gap);
-    box-sizing: border-box;
-    display: block;
+    &.post {
+        max-width: var(--post-width);
+    }
 
-    .post-header,
     .post-content {
         width: 100%;
         max-width: var(--content-inner-width);
         margin: 0 auto;
         line-height: 1.6;
-        margin-top: 2rem;
+        //margin-top: 2rem;
 
         pre {
             line-height: 1.6;
@@ -107,12 +100,7 @@
 @media (max-width: 768px) {
     .main,
     .main.post {
-        margin-top: calc(var(--header-height) + 20px); /* 헤더 높이 + 추가 여백 */
-        padding-top: 0; /* 패딩 제거하고 마진으로 대체 */
-        margin-top: 92px;
-    }
-
-    .main.post {
+        margin-top: var(--post-view-margin-height);
         max-width: 100%;
         padding-left: 12px;
         padding-right: 12px;
@@ -133,7 +121,7 @@
         right: 0;
         width: 100%;
         border-radius: 0;
-        padding: 5px 16px; /* 상하 패딩 줄임 */
+        padding: 5px 5px; /* 상하 패딩 줄임 */
         box-sizing: border-box;
         display: flex;
         justify-content: center;
@@ -148,7 +136,7 @@
         right: auto;
         width: 100%;
         max-width: 600px;
-        height: var(--header-height); /* 높이 명시적 지정 */
+        height: var(--floating-menu-header-height); /* 높이 명시적 지정 */
         z-index: 1000;
         background: transparent;
         padding: 0;
@@ -159,12 +147,6 @@
     .post-inner h1 {
         margin-top: 20px; /* 제목 상단 여백 조정 */
         padding-top: 10px; /* 패딩 조정 */
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .main {
-        margin-top: var(--mobile-header-height);
     }
 }
 
@@ -256,11 +238,9 @@
 }
 
 .post-header {
-    margin-bottom: 1rem;
+    margin-top: 3rem;
 
     .post-title-meta {
-        margin-bottom: 0.5rem;
-
         h1 {
             margin: 0;
             font-size: 1.8rem;
@@ -281,10 +261,20 @@
         }
     }
 
+    .post-date {
+        font-size: 0.9rem;
+        color: var(--secondary);
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+    }
+
     .post-third-line {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: flex-start;
         margin-bottom: 0.5rem;
 
         .post-tags {
@@ -321,7 +311,10 @@
 }
 
 .page-header {
-    margin: var(--content-gap) 0 calc(var(--content-gap) * 1.5);
+    //margin: var(--content-gap) 0 calc(var(--content-gap) * 1.5);
+}
+
+.post-items-header {
 }
 
 .footer-align {
@@ -343,10 +336,15 @@
     margin-left: 1em;
 }
 
+.home-content {
+    margin-top: 3rem;
+}
+
 .split-line {
     height: 1px;
-    background: var(--border);
-    margin: 30px 0;
+    background: var(--secondary);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     width: 100%;
 }
 
@@ -383,31 +381,25 @@
 
 /* List card specific styles */
 .list-item {
-    .post-header {
+    .post-items-header {
         margin-bottom: 0.5rem;
 
         .post-title {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-
-            a {
-                color: var(--text-muted);
-                text-decoration: none;
-
-                &:hover {
-                    color: var(--primary);
-                }
-            }
+            align-items: baseline;
+            gap: 1rem;
 
             .post-date {
-                font-size: 0.9rem;
+                flex-shrink: 0;
+                font-size: 0.9em;
                 color: var(--secondary);
-                margin-left: 1rem;
             }
         }
+    }
+
+    .post-summary {
+        font-size: 0.9rem;
     }
 }
 

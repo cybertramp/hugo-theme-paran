@@ -1,8 +1,8 @@
-<header class="post-header">
+<div class="post-header">
   <div class="post-title-meta">
     <h1>{{ .Title }}</h1>
   </div>
-
+  <div class="split-line"></div>
   <div class="post-category">
     {{ with .Params.categories }}
       <span>
@@ -18,6 +18,12 @@
       </span>
     {{ end }}
   </div>
+  
+  {{ if .Params.categories }}
+    <div class="post-date">
+      <span>Date: {{ .Date.Format "2006-01-02" }}</span>
+    </div>
+  {{ end }}
 
   <div class="post-third-line">
     {{ with .Params.tags }}
@@ -30,4 +36,6 @@
       </div>
     {{ end }}
   </div>
-</header>
+
+  <div class="split-line"></div>
+</div>

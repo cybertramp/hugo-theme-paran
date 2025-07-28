@@ -6,7 +6,7 @@
 
   <body>
     {{- partial "header.html" . .Page -}}
-    <main class="main {{- if (eq .Kind `page`) -}}{{- print " post" -}}{{- end -}}">
+    <main class="main">
       {{- block "main" . }}{{ end }}
     </main>
     <div class="footer-align">
