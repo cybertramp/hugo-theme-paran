@@ -1,10 +1,15 @@
 {{ define "main" }}
   {{/* Home page content */}}
   <div class="home-content">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts" ) }}
     {{ .Content }}
-  </div>
+    <div class="split-line"></div>
 
-  <div class="split-line"></div>
-  {{/* List of pages */}}
-  {{ partial "list-items.html" . }}
+    {{ partial "list-items.html" . }}
+
+    {{ if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" id="next-page-link" style="display: none;"></a>
+      <div id="infinite-scroll-trigger"></div>
+    {{ end }}
+  </div>
 {{ end }}

@@ -29,5 +29,12 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     </script>
+
+    {{ if .IsHome }}
+      {{ $script := resources.Get "js/infinite-scroll.js" }}
+      {{ if $script }}
+        <script src="{{ $script.RelPermalink }}"></script>
+      {{ end }}
+    {{ end }}
   </body>
 </html>
