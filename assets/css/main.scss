@@ -24,9 +24,7 @@
     .post-content {
         width: 100%;
         max-width: var(--content-inner-width);
-        margin: 0 auto;
         line-height: 1.6;
-        //margin-top: 2rem;
 
         pre {
             line-height: 1.6;
@@ -71,10 +69,6 @@
             & > ol {
                 margin: 0.5rem 0;
             }
-        }
-
-        p {
-            margin: 0;
         }
     }
 }
