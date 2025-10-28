@@ -18,8 +18,8 @@ hugo && cd themes/paran && cd ../.. && hugo server --renderStaticToDisk -D
 
 # Todo
 
-- ⬛️ Category pages
-- ⬛️ Toc
-- ✅ theme update
-- ✅ search feature
-- ✅ init
+- [ ] Category pages
+- [ ] Toc
+- [v] theme update
+- [v] search feature
+- [v] init
