@@ -1,15 +1,5 @@
 <div class="list-items">
   {{ range .Paginator.Pages }}
-    <a href="{{ .RelPermalink }}" class="list-item-link">
-      <div class="list-item text-muted">
-        <div class="post-items-header">
-          <h2 class="post-title">
-            {{ .LinkTitle }}
-            <span class="post-date">{{ .Date.Format "2006.01.02" }}</span>
-          </h2>
-        </div>
-        {{ .Summary | plainify | truncate 150 "..." }}
-      </div>
-    </a>
+    {{ partial "post-card.html" . }}
   {{ end }}
 </div>

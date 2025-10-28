@@ -1,5 +1,10 @@
 {{ define "main" }}
-{{ partial "post-header.html" . }}
+<div class="post-header">
+  <div class="post-title-meta">
+    <h1>{{ .Title }} ({{ len .Site.Taxonomies.tags }}ea)</h1>
+  </div>
+  <div class="split-line"></div>
+</div>
 <div class="tags-description">
   {{ .Content }}
 </div>

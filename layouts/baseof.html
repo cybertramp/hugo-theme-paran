@@ -30,11 +30,16 @@
       });
     </script>
 
-    {{ if .IsHome }}
+    {{ if or .IsHome (eq .Section "posts") }}
       {{ $script := resources.Get "js/infinite-scroll.js" }}
       {{ if $script }}
         <script src="{{ $script.RelPermalink }}"></script>
       {{ end }}
+    {{ end }}
+
+    {{ $codeCopyScript := resources.Get "js/code-copy.js" }}
+    {{ if $codeCopyScript }}
+      <script src="{{ $codeCopyScript.RelPermalink }}"></script>
     {{ end }}
   </body>
 </html>

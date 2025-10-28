@@ -2,22 +2,11 @@
 <div class="taxonomy-container">
   <h1>{{ .Title }}</h1>
   {{ .Content }}
-  <div class="posts-list">
+  <div class="split-line"></div>
+  
+  <div class="list-items">
     {{ range .Pages }}
-    <article class="post-summary">
-      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <div class="post-meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006년 1월 2일" }}</time>
-        {{ with .Params.tags }}
-        <div class="tags">
-          {{ range . }}
-            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">#{{ . }}</a>
-          {{ end }}
-        </div>
-        {{ end }}
-      </div>
-      <div class="summary">{{ .Summary }}</div>
-    </article>
+      {{ partial "post-card.html" . }}
     {{ end }}
   </div>
 </div>

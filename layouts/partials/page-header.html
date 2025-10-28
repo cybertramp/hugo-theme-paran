@@ -1,0 +1,11 @@
+{{/* 
+  Page header component with title, count, and divider
+  Usage: {{ partial "page-header.html" (dict "icon" "🏷️" "title" .Title "count" (len .Pages)) }}
+*/}}
+<h1>{{ .icon }} {{ .title }}</h1>
+{{ with .count }}
+  <div class="post-count">
+    Total Posts: {{ . }}
+  </div>
+{{ end }}
+<div class="split-line"></div>

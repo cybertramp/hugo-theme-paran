@@ -1,18 +1,20 @@
 {{ define "main" }}
   <div class="search-container">
+    <h1>🔍 Search</h1>
     <div class="search-box">
       <input type="text" id="search-input" placeholder="Enter search keyword" autocomplete="off" />
       <button id="search-button">Search</button>
     </div>
-    <div id="search-results"></div>
     <div id="result-count"></div>
+    <div class="split-line"></div>
+    <div id="search-results"></div>
   </div>
 
   <script id="search-index" type="application/json">
     {{- $pages := where site.Pages "Kind" "page" -}}
     {{- $index := slice -}}
     {{- range $pages -}}
-      {{- $index = $index | append (dict "title" .Title "permalink" .RelPermalink "content" (.Plain | htmlUnescape) "summary" .Summary "date" (.Date.Format "2006-01-02") "tags" .Params.tags) -}}
+      {{- $index = $index | append (dict "title" .Title "permalink" .RelPermalink "content" (.Plain | htmlUnescape) "summary" .Summary "date" (.Date.Format "2006-01-02") "tags" .Params.tags "categories" .Params.categories) -}}
     {{- end -}}
     {{- $index | jsonify -}}
     </script>
@@ -71,6 +73,7 @@
           summary: item.summary || "",
           date: item.date || "",
           tags: Array.isArray(item.tags) ? item.tags : [],
+          categories: Array.isArray(item.categories) ? item.categories : [],
         }));
 
       console.log("Total valid search items:", searchData.length);
@@ -109,15 +112,25 @@
         }
 
         resultCount.textContent = `${results.length}ea results`;
-        resultsDiv.innerHTML = `<ul>${results
+        resultsDiv.innerHTML = `<div class="list-items">${results
           .map(
-            (result) => `<li>
-            <h3>${result.item.title}</h3>
-            <p>${getHighlightedSnippet(result)}</p>
-            <a href="${result.item.permalink}">show more..</a>
-          </li>`,
+            (result) => `
+            <a href="${result.item.permalink}" class="list-item-link">
+              <div class="list-item text-muted">
+                <div class="post-items-header">
+                  <h2 class="post-title">${result.item.title}</h2>
+                  <div class="post-meta-line">
+                    ${result.item.categories && result.item.categories.length > 0 ? `<span class="post-category">📁 ${result.item.categories[0]}</span>` : ''}
+                    <span class="post-date">${result.item.date}</span>
+                  </div>
+                </div>
+                <div class="post-summary">
+                  ${getHighlightedSnippet(result)}
+                </div>
+              </div>
+            </a>`,
           )
-          .join("")}</ul>`;
+          .join("")}</div>`;
       }
 
       function getHighlightedSnippet(result) {

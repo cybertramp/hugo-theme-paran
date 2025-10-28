@@ -1,0 +1,25 @@
+{{/* 
+  Post card component
+  Usage: {{ partial "post-card.html" . }}
+  Context: Page object
+*/}}
+<a href="{{ .RelPermalink }}" class="list-item-link">
+  <div class="list-item text-muted">
+    <div class="post-items-header">
+      <h2 class="post-title">
+        {{ .LinkTitle }}
+      </h2>
+      <div class="post-meta-line">
+        {{ with .Params.categories }}
+          {{ range first 1 . }}
+            <span class="post-category">📁 {{ . }}</span>
+          {{ end }}
+        {{ end }}
+        <span class="post-date">{{ .Date.Format "2006.01.02" }}</span>
+      </div>
+    </div>
+    <div class="post-summary">
+      {{ .Summary | plainify | truncate 150 "..." }}
+    </div>
+  </div>
+</a>

@@ -12,23 +12,26 @@
     --footer-height: 80px;
     --radius: 8px;
 
-    --theme: rgb(29, 30, 32);
-    --entry: rgb(46, 46, 51);
-    --primary: rgb(218, 218, 219);
-    --primary-dim: rgb(186, 186, 186);
-    --secondary: rgb(155, 156, 157);
-    --tertiary: rgb(123, 124, 124);
-    --tertiary-bg: rgb(65, 66, 68);
-    --content: rgb(196, 196, 197);
-    --code-bg: rgb(55, 56, 62);
-    --border: rgb(51, 51, 51);
-    --link-bg-color: #5242746d;
-    --link-color: var(--main);
-    --link-hover-color: #573eaa;
+    /* 다크 테마 색상 (cybertramp.net 스타일) */
+    --theme: #1a1a1a;
+    --entry: #2a2a2a;
+    --primary: orange;
+    --primary-dim: #ff9e64;
+    --secondary: #ffbd2e;
+    --tertiary: #999;
+    --tertiary-bg: #2a2a2a;
+    --content: orange;
+    --code-bg: #2a2a2a;
+    --border: #333;
+    --link-bg-color: rgba(255, 165, 0, 0.1);
+    --link-color: orange;
+    --link-hover-color: #ffbd2e;
     --link-underline-shadow: 0 1px 0 var(--link-color);
-    --link-hover-underline-color: #6549c0;
+    --link-hover-underline-color: #ffbd2e;
     --link-hover-underline-shadow: 0 2px 0 var(--link-hover-underline-color);
     --link-transition: all 0.3s ease;
+    --header-bg: rgba(26, 26, 26, 0.95);
+    --text-muted: #999;
 
     /* 레이아웃 크기 */
     --content-width: 1200px;
@@ -36,5 +39,5 @@
     --post-width: 800px;
 
     /* 검색 관련 변수 */
-    --primary-darker: rgb(180, 180, 180);
+    --primary-darker: #ff9e64;
 }

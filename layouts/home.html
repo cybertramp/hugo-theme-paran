@@ -1,15 +1,13 @@
 {{ define "main" }}
-  {{/* Home page content */}}
+  {{/* Home page content - 최근 5개 포스트만 표시 */}}
   <div class="home-content">
-    {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts" ) }}
     {{ .Content }}
     <div class="split-line"></div>
 
-    {{ partial "list-items.html" . }}
-
-    {{ if $paginator.HasNext }}
-      <a href="{{ $paginator.Next.URL }}" id="next-page-link" style="display: none;"></a>
-      <div id="infinite-scroll-trigger"></div>
-    {{ end }}
+    <div class="list-items">
+      {{ range first 5 (where .Site.RegularPages "Section" "posts") }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
   </div>
 {{ end }}

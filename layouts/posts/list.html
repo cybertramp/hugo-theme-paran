@@ -1,8 +1,18 @@
 {{ define "main" }}
-  <div class="post-count">
-    Total Posts:
-    {{ len .Pages }}
-  </div>
+  {{/* Posts page - 무한 스크롤 적용 */}}
+  <div class="home-content">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts" ) }}
+    
+    <div class="post-count">
+      Total Posts: {{ len (where .Site.RegularPages "Section" "posts") }}
+    </div>
+    <div class="split-line"></div>
 
-  {{ partial "list-items" . }}
+    {{ partial "list-items.html" . }}
+
+    {{ if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" id="next-page-link" style="display: none;"></a>
+      <div id="infinite-scroll-trigger"></div>
+    {{ end }}
+  </div>
 {{ end }}

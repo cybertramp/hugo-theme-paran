@@ -6,7 +6,8 @@ html {
 }
 
 body {
-    color: #222;
+    color: orange;
+    background-color: #1a1a1a;
     font-family: sans-serif;
     line-height: 1.5;
     margin: 1rem;
@@ -21,7 +22,7 @@ table {
     border-spacing: 0;
     overflow-x: auto;
     word-break: keep-all;
-    border: 1px solid #000;
+    border: 1px solid #444;
 }
 
 /* 전역 table 스타일 최소화 */
@@ -35,8 +36,17 @@ td {
 /* 마크다운 본문(post-content) 스타일 */
 .post-content {
     line-height: 1.7;
-    color: #222;
+    color: #fff;
     margin-bottom: 2em;
+}
+
+.post-content p {
+    margin-bottom: 1.2em;
+    line-height: 1.8;
+}
+
+.post-content p + p {
+    margin-top: 0;
 }
 
 .post-content h1,
@@ -48,11 +58,16 @@ td {
     margin-top: 1.5em;
     margin-bottom: 0.7em;
     font-weight: bold;
+    color: orange;
 }
 
 .post-content ul,
 .post-content ol {
     margin: 1em 0 1em 2em;
+}
+
+.post-content br {
+    line-height: 0.5;
 }
 
 .post-content table {
@@ -61,18 +76,18 @@ td {
     width: auto;
     min-width: 40%;
     max-width: 100%;
-    border: 1px solid #000;
+    border: 1px solid #444;
     border-collapse: collapse;
 }
 
 .post-content table thead th {
-    border: 1px solid #000;
+    border: 1px solid #444;
     text-align: center;
     vertical-align: middle;
 }
 
 .post-content table td {
-    border: 1px solid #000;
+    border: 1px solid #444;
     text-align: left;
     vertical-align: middle;
 }
@@ -132,16 +147,16 @@ img {
 }
 
 header {
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #444;
 }
 
 footer {
-    border-top: 1px solid #222;
+    border-top: 1px solid #444;
     margin-top: 1rem;
 }
 
 a {
-    color: #00e;
+    color: orange;
     text-decoration: none;
 }
 
@@ -154,8 +169,8 @@ a {
 }
 .tag-badge {
     display: inline-block;
-    background: #e0e7ff;
-    color: #3730a3;
+    background: rgba(255, 165, 0, 0.2);
+    color: orange;
     padding: 0.4em 1em;
     border-radius: 20px;
     font-weight: bold;
@@ -163,11 +178,11 @@ a {
     transition: background 0.2s;
 }
 .tag-badge:hover {
-    background: #c7d2fe;
+    background: rgba(255, 165, 0, 0.3);
 }
 .tag-count {
-    background: #6366f1;
-    color: #fff;
+    background: #ff9e64;
+    color: #1a1a1a;
     margin-left: 0.5em;
     padding: 0 0.6em;
     border-radius: 10px;

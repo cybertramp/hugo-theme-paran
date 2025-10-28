@@ -3,39 +3,32 @@
     <h1>{{ .Title }}</h1>
   </div>
   <div class="split-line"></div>
-  <div class="post-category">
-    {{ with .Params.categories }}
-      <span>
-        Loc: /{{ $.Section }}/{{ range $i, $e := . }}{{ if $i }}, {{ end }}<a href="{{ "categories/" | relLangURL }}{{ . | urlize }}">{{ . | lower }}</a>{{ end }}
-      </span>
-    {{ else }}
-      <span>
-        Loc:{{ if eq .Kind "term" }} /{{ .Section }}/{{ .Title | lower }}{{ else if eq .Section "posts" }}
-          /{{ with .Params.category }}{{ . | lower }}/{{ end }}{{ .File.ContentBaseName }}
-        {{ else }}
-          {{ with .Section }}/{{ . }}{{ else }}/{{ end }}
-        {{ end }}
-      </span>
-    {{ end }}
-  </div>
   
-  {{ if .Params.categories }}
-    <div class="post-date">
-      <span>Date: {{ .Date.Format "2006-01-02" }}</span>
+  {{ if and (ne .Section "about") (ne .Section "box") }}
+    <div class="post-category">
+      {{ with .Params.categories }}
+        <span>
+          📁 Categories: {{ range $i, $e := . }}{{ if $i }}, {{ end }}<a href="{{ "categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>{{ end }}
+        </span>
+      {{ end }}
     </div>
+    
+    <div class="post-date">
+      <span>📅 Date: {{ .Date.Format "2006-01-02" }}</span>
+    </div>
+
+    <div class="post-third-line">
+      {{ with .Params.tags }}
+        <div class="post-tags">
+          <span>🏷️ Tags: </span>
+          {{ range $index, $tag := . }}
+            {{ if $index }}, {{ end }}
+            <a href="{{ "tags/" | relLangURL }}{{ $tag | urlize }}">{{ $tag }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+
+    <div class="split-line"></div>
   {{ end }}
-
-  <div class="post-third-line">
-    {{ with .Params.tags }}
-      <div class="post-tags">
-        <span>Tags: </span>
-        {{ range $index, $tag := . }}
-          {{ if $index }},{{ end }}
-          <a href="{{ "tags/" | relLangURL }}{{ $tag | urlize }}">#{{ $tag }}</a>
-        {{ end }}
-      </div>
-    {{ end }}
-  </div>
-
-  <div class="split-line"></div>
 </div>
